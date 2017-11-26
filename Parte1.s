@@ -1,7 +1,6 @@
 # Trabalho-ARM
-		MOV		R0, #0
 		MOV		R1, #1 ; n
-		ADD		R4, R0, #2147483648	;coloca em r6 o valor para TST
+		MOV		R4, #2147483648	;coloca em R6 o valor para TST
 		MOV		R6, #5 ;numero base (a1)
 		MOV		R7, #500 ; RX*10
 		STR		R6,[R7,#0] ; armazena o numero base no endereço #500
