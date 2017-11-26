@@ -17,3 +17,4 @@ FOR
 		TST		R4, R6 ;testa se o valor de R6 é inferior a 2147483648
 		B		FOR
 DONE
+                LDR          R5,[R7,#0]
