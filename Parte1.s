@@ -1,14 +1,20 @@
 # Trabalho-ARM
-	
-		MOV	  R0, #1 ; a1
-		MOV	  R1, #1 ; n
-		MOV       R2, #0 ; an
-		MOV       R3, #2 ; q
+		MOV		R0, #0
+		MOV		R1, #1 ; n
+		ADD		R4, R0, #2147483648	;coloca em r6 o valor para TST
+		MOV		R6, #5 ;numero base (a1)
+		MOV		R7, #500 ; RX*10
+		STR		R6,[R7,#0] ; armazena o numero base no endereço #500
+		
+		
 		
 FOR
-		CMP		R1, #10
+		CMP		R1, #10 ; se R1 é menor que 10 continua o loop
 		BEQ		DONE
-		LSL 		R3, R3, #1
-		ADD		R1, R1, #1
+		LSL		R6, R6, #1  ;armazena os valores da pg
+		ADD		R7,R7, #4  ;desloca 4 bytes
+		STR		R6, [R7, #0] ;armazena o conteúdo de R6 no endereço de R7
+		ADD		R1, R1, #1  ;n=n+1
+		TST		R4, R6 ;testa se o valor de R6 é inferior a 2147483648
 		B		FOR
 DONE
