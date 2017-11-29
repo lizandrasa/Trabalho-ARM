@@ -1,9 +1,13 @@
 #Trabalho-ARM
 		ADD		R1,R1, #1 ; n
-		ADD		R4,R4, #2147483648	;coloca em R6 o valor para TST
-		ADD		R6,R6, #5 ;numero base (a1)
-		ADD		R7,R7, #500 ; RX*10
-		STR		R6,[R7,#0] ; armazena o numero base no endereço #500
+		ADD		R4,R4, #2147483648  ;coloca em R6 o valor para TST
+		ADD		R6,R6, #5 ; número base (a1)
+		ADD		R7,R7, #1000 ; RX*100
+		ADD		R7,R7, #1000 ; RX*100
+		ADD		R7,R7, #1000 ; RX*100
+		ADD		R7,R7, #1000 ; RX*100
+		ADD		R7,R7, #1000 ; RX*100
+		STR		R6,[R7,#0] ; armazena o número base no endereço #500
 		
 		
 		
