@@ -1,7 +1,7 @@
 #Trabalho-ARM
 		AND		R1,R1, #0
 		AND		R4,R4, #0
-		AND		R6, R6, #0
+		AND		R6, R6,#0
 		AND		R7,R7, #0
 		AND		R5,R5, #0
 		ADD		R1,R1, #1 ; n
