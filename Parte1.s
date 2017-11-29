@@ -2,7 +2,11 @@
 		ADD		R1, #1 ; n
 		ADD		R4, #2147483648	;coloca em R6 o valor para TST
 		ADD		R6, #5 ;numero base (a1)
-		ADD		R7, #500; RX*10
+		ADD		R7, #1000; 
+		ADD		R7, #1000;
+		ADD		R7, #1000;
+		ADD		R7, #1000;
+		ADD		R7, #1000; 
 		ADD		R1,R1, #1 ; n
 		ADD		R4,R4, #2147483648	;coloca em R6 o valor para TST
 		ADD		R6,R6, #5 ;numero base (a1)
