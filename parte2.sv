@@ -101,10 +101,10 @@ module testbench();
   always @(negedge clk)
     begin
       if(MemWrite) begin
-	      if(DataAdr === 5036 & WriteData === 2560) begin
+	      if(DataAdr === 5036 & WriteData === 2560) begin //Modificação 1: Verificar se atende o que foi solicitado. DataAdr recebe o endereço do ultimo termo da PG, e WriteData recebe o valor do último termo da PG
           $display("Simulation succeeded");
           $stop;
-        end else if (DataAdr !== 96) begin
+	      end else if (DataAdr !== 5036) begin
           $display("Simulation failed");
           $stop;
         end
@@ -188,16 +188,16 @@ module controller(input  logic         clk, reset,
   
   decoder dec(Instr[27:26], Instr[25:20], Instr[15:12],
               FlagW, PCS, RegW, MemW,NoWrite,
-              MemtoReg, ALUSrc, ImmSrc, RegSrc, ALUControl);  //adicionado
+	      MemtoReg, ALUSrc, ImmSrc, RegSrc, ALUControl); // Modificação 2: No write foi adicionado ao decoder e ao Conditional logic para que as instruções CMP e TST não escrevam   
   condlogic cl(clk, reset, Instr[31:28], ALUFlags,
                FlagW, PCS, RegW, MemW,
-               PCSrc, RegWrite,NoWrite, MemWrite);   //NoWrite
+	       PCSrc, RegWrite,NoWrite, MemWrite); // Modificação 3: ler Modificação 2.  
 endmodule
 
 module decoder(input  logic [1:0] Op,
                input  logic [5:0] Funct,
                input  logic [3:0] Rd,
-	       output logic       NoWrite //adicionado
+	       output logic       NoWrite // Modificação 4: NoWrite será uma das saídas do ALUDecoder 
                output logic [1:0] FlagW,
                output logic       PCS, RegW, MemW,
                output logic       MemtoReg, ALUSrc,
