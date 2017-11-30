@@ -236,7 +236,8 @@ module decoder(input  logic [1:0] Op,
             4'b0000: NoWrite = 0; // AND
   	    4'b1100: NoWrite = 0; // ORR
 	    4'b1010: NoWrite = 1;  //CMP   //adicionado
-	    4'b1000: NoWrite = 1; //TST //adicionado 
+	    4'b1000: NoWrite = 1; //TST //adicionado
+	    default: ALUControl = 2'bx;  // unimplemented
        endcase
        
        case(Funct[4:1]) 
@@ -246,9 +247,7 @@ module decoder(input  logic [1:0] Op,
   	    4'b1100: ALUControl = 2'b11; // ORR
 	    4'b1010: ALUControl = 2'b01;  //CMP   //adicionado
 	    4'b1000: ALUControl = 2'b10; //TST //adicionado 	
-       endcase		
-            		
-      default: ALUControl = 2'bx;  // unimplemented
+       	    default: ALUControl = 2'bx;  // unimplemented
       endcase
       // update flags if S bit is set 
 	// (C & V only updated for arith instructions)
