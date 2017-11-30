@@ -231,12 +231,19 @@ module decoder(input  logic [1:0] Op,
   always_comb
     if (ALUOp) begin                 // which DP Instr?
       case(Funct[4:1]) 
+  	    4'b0100: NoWrite = 0; // ADD
+  	    4'b0010: NoWrite = 0; // SUB
+            4'b0000: NoWrite = 0; // AND
+  	    4'b1100: NoWrite = 0; // ORR
+	    4'b1010: NoWrite = 1;  //CMP   //adicionado
+	    4'b1000: NoWrite = 1; //TST //adicionado 
+      case(Funct[4:1]) 
   	    4'b0100: ALUControl = 2'b00; // ADD
   	    4'b0010: ALUControl = 2'b01; // SUB
             4'b0000: ALUControl = 2'b10; // AND
   	    4'b1100: ALUControl = 2'b11; // ORR
 	    4'b1010: ALUControl = 2'b01;  //CMP   //adicionado
-	    4'b 	
+	    4'b1000: ALUControl = 2'b10; //TST //adicionado 	
 			
             		
   	    default: ALUControl = 2'bx;  // unimplemented
@@ -260,7 +267,7 @@ module condlogic(input  logic       clk, reset,
                  input  logic [3:0] Cond,
                  input  logic [3:0] ALUFlags,
                  input  logic [1:0] FlagW,
-                 input  logic       PCS, RegW, MemW,
+                 input  logic       PCS, RegW, MemW, NoWrite,    //adicionado
                  output logic       PCSrc, RegWrite, MemWrite);
                  
   logic [1:0] FlagWrite;
