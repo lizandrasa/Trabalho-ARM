@@ -235,8 +235,8 @@ module decoder(input  logic [1:0] Op,
   	    4'b0010: NoWrite = 0; // SUB
             4'b0000: NoWrite = 0; // AND
   	    4'b1100: NoWrite = 0; // ORR
-	    4'b1010: NoWrite = 1;  //CMP   //adicionado
-	    4'b1000: NoWrite = 1; //TST //adicionado
+	    4'b1010: NoWrite = 1; // Modificação 5: ativar NoWrite na intrução CMP. Nas linhas anteriores desativar os comandos anteriores 
+	    4'b1000: NoWrite = 1; // Modificação 6: ativar NoWrite na intrução TST. 
 	    default: ALUControl = 2'bx;  // unimplemented
        endcase
        
@@ -245,8 +245,8 @@ module decoder(input  logic [1:0] Op,
   	    4'b0010: ALUControl = 2'b01; // SUB
             4'b0000: ALUControl = 2'b10; // AND
   	    4'b1100: ALUControl = 2'b11; // ORR
-	    4'b1010: ALUControl = 2'b01;  //CMP   //adicionado
-	    4'b1000: ALUControl = 2'b10; //TST //adicionado 	
+	    4'b1010: ALUControl = 2'b01; // Modificação 7: CMP faz a comparação através de subtração de ScrB de ScrA. 
+	    4'b1000: ALUControl = 2'b10; // Modificação 8: TST tem sua lógica basead em um AND. 	
        	    default: ALUControl = 2'bx;  // unimplemented
       endcase
       // update flags if S bit is set 
@@ -268,7 +268,7 @@ module condlogic(input  logic       clk, reset,
                  input  logic [3:0] Cond,
                  input  logic [3:0] ALUFlags,
                  input  logic [1:0] FlagW,
-                 input  logic       PCS, RegW, MemW, NoWrite,    //adicionado
+                 input  logic       PCS, RegW, MemW, NoWrite, // Modificação 9: NoWrite é uma das entradas da Conditional Logic
                  output logic       PCSrc, RegWrite, MemWrite);
                  
   logic [1:0] FlagWrite;
@@ -283,7 +283,7 @@ module condlogic(input  logic       clk, reset,
   // write controls are conditional
   condcheck cc(Cond, Flags, CondEx);
   assign FlagWrite = FlagW & {2{CondEx}};
-  assign RegWrite  = RegW  & CondEx & ~NoWrite;
+  assign RegWrite  = RegW  & CondEx & ~NoWrite; // Modificação 10: NoWrite é uma das entradas de RegWrite que define quando há escrita no Register File
   assign MemWrite  = MemW  & CondEx;
   assign PCSrc     = PCS   & CondEx;
 endmodule    
